@@ -55,13 +55,14 @@ scenarios<-rbind.data.frame(S1,
                             S3)
 dose.labels= seq(-2,4,by=1)
 dimnames(scenarios)[[2]]<-paste("d(", dose.labels,")", sep="")
+scenarios<-cbind.data.frame("Scenario" = c("S1", "S2", "S3"), scenarios)
 knitr::kable(scenarios)
 
 ## ------------------------------------------------------------------------
 set.seed(1000)
 No.of.simulations = 50
 
-## ---- results= "hide"----------------------------------------------------
+## ----message=FALSE, warning=FALSE, results= "hide"-----------------------
 sim1_1 <- applied_crm_sim(true_tox = S1, prior = prior.DLT, target = target.DLT, max_sample_size=max.sample.size, first_dose=start.dose.level, num_sims = No.of.simulations, cohort_size = cohort.size, dose_func = applied_crm, scale = sqrt(prior.var), stop_func = stop_func)
 
 ## ------------------------------------------------------------------------
@@ -78,7 +79,8 @@ out<- cbind.data.frame(
       Stop.Tox  =   c("", stop.fun(sim1_1$summary$prob_stop, "Tox"), ""),
       Stop.nMTD =   c("", stop.fun(sim1_1$summary$prob_stop, "Con"), "")
 )
-dimnames(out)[[2]][1:length(dose.labels)]<-paste("d(", seq(-2,4,by=1),")", sep="")
+dimnames(out)[[2]][1:length(dose.labels)]<-paste("d(", dose.labels,")", sep="")
+dimnames(out)[[1]] <- paste(c(paste("S1", " True DLT rate", sep = ""), paste("S1",  " Selection Probability", sep = ""), paste("S1",  " Mean Number of Subjects", sep = "")))
 
 
 ## ---- echo= FALSE, results="hide"----------------------------------------
@@ -95,7 +97,8 @@ out2<- cbind.data.frame(
       Stop.Tox  =   c("", stop.fun(sim1_2$summary$prob_stop, "Tox"), ""),
       Stop.nMTD =   c("", stop.fun(sim1_2$summary$prob_stop, "Con"), "")
 )
-dimnames(out2)[[2]][1:length(dose.labels)]<-paste("d(", seq(-2,4,by=1),")", sep="")
+dimnames(out2)[[2]][1:length(dose.labels)]<-paste("d(", dose.labels,")", sep="")
+dimnames(out2)[[1]] <- paste(c(paste("S2", " True DLT rate", sep = ""), paste("S2", " Selection Probability", sep = ""), paste("S2", " Mean Number of Subjects", sep = "")))
 
 out3<- cbind.data.frame(
            rbind.data.frame("S3 True Tox" = sim1_3$summary$true_tox,
@@ -104,7 +107,8 @@ out3<- cbind.data.frame(
       Stop.Tox  =   c("", stop.fun(sim1_3$summary$prob_stop, "Tox"), ""),
       Stop.nMTD =   c("", stop.fun(sim1_3$summary$prob_stop, "Con"), "")
 )
-dimnames(out3)[[2]][1:length(dose.labels)]<-paste0("d(", seq(-2,4,by=1),")")
+dimnames(out3)[[2]][1:length(dose.labels)]<-paste0("d(", dose.labels,")")
+dimnames(out3)[[1]] <- paste(c(paste("S3",  " True DLT rate", sep = ""), paste("S3",  " Selection Probability", sep = ""), paste("S3",  " Mean Number of Subjects", sep = "")))
 
 
 out<- rbind.data.frame(
@@ -113,7 +117,6 @@ out<- rbind.data.frame(
       out2,
       out3
 )      
-
 
 ## ---- echo=FALSE---------------------------------------------------------
 knitr::kable(out)
@@ -134,8 +137,9 @@ viola_dtp[seq(1, ncol(viola_dtp), by=2)] <- viola_dtp[seq(1, ncol(viola_dtp), by
 indSTOP<-is.na(viola_dtp[seq(1,ncol(viola_dtp), by=2)])
 viola_dtp.pretty<-viola_dtp
 viola_dtp.pretty[seq(1,ncol(viola_dtp.pretty), by=2)][indSTOP]<-"STOP"
+viola_dtp.pretty<-cbind.data.frame(1:nrow(viola_dtp.pretty), viola_dtp.pretty)
+dimnames(viola_dtp.pretty)[[2]]<-c('Pathway', 'C1 Dose', 'C1 No.DLT',  'C2 Dose', 'C2 No.DLT','C3 Dose', 'C3 No.DLT', 'C4 Dose')
 
-dimnames(viola_dtp.pretty)[[2]]<-c('C1 Dose', 'C1 No.DLT',  'C2 Dose', 'C2 No.DLT','C3 Dose', 'C3 No.DLT', 'C4 Dose')
 
 ## ---- echo=FALSE---------------------------------------------------------
 knitr::kable(viola_dtp.pretty)
@@ -187,10 +191,11 @@ dtp_c3 <- calculate_dtps(next_dose = 5, cohort_sizes = c(3, 3, 3),
 
 # Using dose labels                         
 dtp_c3[seq(1, ncol(dtp_c3), by=2)] <- dtp_c3[seq(1, ncol(dtp_c3), by=2)] - start.dose.level
-dimnames(dtp_c3)[[2]]<-c('C3 Dose', 'C3 No.DLT',  'C4 Dose', 'C4 No.DLT','C5 Dose', 'C5 No.DLT', 'C6 Dose')
+dtp_c3_pretty<-cbind.data.frame(1:nrow(dtp_c3), dtp_c3)
+dimnames(dtp_c3_pretty)[[2]]<-c('Pathway','C3 Dose', 'C3 No.DLT',  'C4 Dose', 'C4 No.DLT','C5 Dose', 'C5 No.DLT', 'C6 Dose')
 
 ## ----echo=FALSE, warning=FALSE-------------------------------------------
-knitr::kable(dtp_c3)
+knitr::kable(dtp_c3_pretty)
 
 ## ---- fig.width=8, fig.height=6------------------------------------------
 dtpflow(dtp_c3, cohort.labels = c('C3', 'C4', 'C5') )

@@ -1,4 +1,4 @@
-92994d79e55045e13516cffd9bda8c11 *DESCRIPTION
+9b02c1236a196943abd435020a9580e3 *DESCRIPTION
 f35d0c80faf4f6be0257873c1989b008 *NAMESPACE
 399bdc5bd3ab12ef8946e703a2c82e2b *R/applied_crm.R
 f11e35796796fd10a70c343d7d64f116 *R/applied_titecrm.R
@@ -8,11 +8,11 @@ d2af00059ff036d09d919fb5fc63fbcb *R/dtps_flow_chart.R
 4ba3f101f2c2662b04f8f3509999c2f2 *R/simulation.R
 fa57ee368de2f4d8a2ecf376b67e4f79 *R/simulation_titecrm.R
 0d3ca5808c99f6eb81ad737596dcac9f *R/simulation_titecrmts.R
-58bc2ff29e5a06146e2d8e7c0cca7629 *R/stopping_delegates.R
+8f1f1ca7d2c773c9e9ab9b7968ad65c2 *R/stopping_delegates.R
 0bdb39efc8dd285c8a0a3228efaeb6aa *build/vignette.rds
-267e4a48b8d896c29ceb1add8e961d89 *inst/doc/dtpcrm_vignettev02.R
-2cc806c927b861a1b461776990a12102 *inst/doc/dtpcrm_vignettev02.Rmd
-dba970be74dbaf62157cfbc271eefb1e *inst/doc/dtpcrm_vignettev02.html
+6e04ef4987b044894e5c53fde890b625 *inst/doc/dtpcrm_vignettev02.R
+bdaa904eec94aea34eba7f8dc725b23a *inst/doc/dtpcrm_vignettev02.Rmd
+a9fa3f478de668713b157fbcf6c9fc04 *inst/doc/dtpcrm_vignettev02.html
 7dd98c036055f6306402000949fdebed *man/applied_crm.Rd
 f2acfea91789fd24fa325cb0c25cc863 *man/applied_crm_sim.Rd
 2c46de93e223062d6ed439890cdd4806 *man/applied_titecrm.Rd
@@ -28,4 +28,4 @@ d43cf86d348365c95628060f6c4d38ce *man/stop_for_excess_toxicity_logistic.Rd
 14b1724083f624a1e56d716234f64576 *man/summary_crm.Rd
 73813cee1002561dcc1dc299ca566e47 *tests/testthat.R
 90912676ceb50c0810777a36af290afe *tests/testthat/test-dtpcrm.R
-2cc806c927b861a1b461776990a12102 *vignettes/dtpcrm_vignettev02.Rmd
+bdaa904eec94aea34eba7f8dc725b23a *vignettes/dtpcrm_vignettev02.Rmd
